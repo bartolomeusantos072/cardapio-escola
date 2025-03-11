@@ -1,0 +1,81 @@
+header {
+   background-image: url("img/images.jfif");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: top;
+   background-attachment: scroll;
+   height: 200px;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+
+}
+
+header img{
+  border-radius: 50%;
+  height: 170px;
+  width: 170px;
+}
+
+h1{
+   font-size: 10em; 
+   color: yellow;    
+}
+
+h2, h3{
+  text-align: center;
+}
+
+h2{
+  color: green;
+  font-size: 60px;
+}
+
+h3{
+        color: orangered;
+        font-size: 50px;
+
+}
+li{
+  font-size: 45px;
+}
+
+
+label, button{
+        text-align: center;
+        font-size: 30px;
+        
+}
+form h3{
+  color:red;
+}
+
+section{
+        display: flex;
+        justify-content: center;
+}
+
+section img{
+        height: 200px;
+        width: 250px;
+        
+}
+form{
+        text-align: center;
+}
+
+form div{
+        display: flex;
+        justify-content:space-evenly;
+}
+
+button{
+  padding: 15px 32px;
+  border: none;
+  margin: 4px 2px;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+
