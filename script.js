@@ -81,3 +81,31 @@ fetchPratosApi();
 // Atualiza a cada minuto
 setInterval(exibirResultados, 60000);
 
+const form = document.querySelector('footer form');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const respostaSelecionada = document.querySelector('input[name="resposta"]:checked');
+
+  if (!respostaSelecionada) {
+    alert('Por favor, selecione uma opção.');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/votacao', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ resposta: respostaSelecionada.value })
+    });
+
+    if (!response.ok) throw new Error();
+
+    const data = await response.json();
+    alert(data.message || 'Voto registrado com sucesso!');
+    window.location.href = 'resultado.html';
+  } catch {
+    alert('Erro ao enviar voto.');
+  }
+});
