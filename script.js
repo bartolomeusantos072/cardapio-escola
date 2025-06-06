@@ -14,17 +14,6 @@ async function fetchPratosApi() {
   }
 }
 
-/*
-    bebida:"Suco de Laranja"
-    dia:"2025-06-02T00:00:00.000Z"
-    id_prato:15
-    id_usuario:5
-    imagem:"https://www.gastronomia.com.br/wp-content/uploads/2024/01/comida-com-f-feijoada-falafel-fondue-e-muito-mais.jpg"
-    principal:"Lasanha de Carne"
-    sobremesa:"Pudim"
-    turno:"Noturno"
-*/
-
 function exibirResultado(cardapios) {
   const main = document.querySelector('main');
   main.innerHTML = ''; // limpa antes
@@ -113,7 +102,7 @@ form.addEventListener('submit', async e => {
     alert('Não foi possível obter seu IP. Tente novamente.');
     return;
   }
-
+  console.log(id_prato,voto,ip_usuario);
   try {
     const response = await fetch('http://localhost:3000/votacao', {
       method: 'POST',

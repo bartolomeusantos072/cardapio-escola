@@ -1,36 +1,44 @@
-    async function fetchVotosApi() {
-  const url = `http://localhost:3000/votacao`;
-
+async function fetchVotosApi() {
   try {
-    const resposta = await fetch(url);
+    const resposta = await fetch('http://localhost:3000/votacao');
+
     if (!resposta.ok) throw new Error('Resultado não encontrado');
 
     const votos = await resposta.json();
     exibirResultadoVotos(votos);
-
   } catch (erro) {
-    console.log(erro);
-    const main = document.querySelector('main');
-    main.innerHTML = `<p>Erro: ${erro.message}</p>`;
+    console.error(erro);
+    document.querySelector('main').innerHTML = `<p>Erro: ${erro.message}</p>`;
   }
 }
 
 function exibirResultadoVotos(votos) {
   const main = document.querySelector('main');
-  main.innerHTML = ''; // limpa conteúdo anterior
+  main.innerHTML = '';
 
   const h2 = document.createElement('h2');
   h2.textContent = 'Resultado da Votação de Hoje';
   main.appendChild(h2);
 
-  const pSim = document.createElement('p');
-  pSim.textContent = `Votos "Sim": ${votos.sim}`;
-  main.appendChild(pSim);
+  if (votos.length === 0) {
+    main.innerHTML += '<p>Nenhum voto registrado hoje.</p>';
+    return;
+  }
 
-  const pNao = document.createElement('p');
-  pNao.textContent = `Votos "Não": ${votos.nao}`;
-  main.appendChild(pNao);
+  const ul = document.createElement('ul');
+
+  votos.forEach((prato) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <strong>${prato.principal}</strong><br>
+      Votos "Sim": ${prato.votos_sim || 0}<br>
+      Votos "Não": ${prato.votos_nao || 0}
+    `;
+    ul.appendChild(li);
+  });
+
+  main.appendChild(ul);
 }
 
-// Chama ao carregar a página
+// Inicia a busca ao carregar a página
 fetchVotosApi();
