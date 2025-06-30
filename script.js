@@ -1,5 +1,5 @@
 async function fetchPratosApi() {
-  const url = `http://localhost:3000/pratos`;
+  const url = `https://api-cantina-storage.vercel.app/pratos`;
   try {
     const resposta = await fetch(url);
     if (!resposta.ok) {
@@ -79,40 +79,53 @@ async function getUserIP() {
 }
 
 const form = document.querySelector('footer form');
-form.addEventListener('submit', async e => {
+
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  // Verifica se uma resposta foi selecionada
   const respostaSelecionada = document.querySelector('input[name="resposta"]:checked');
   if (!respostaSelecionada) {
     alert('Por favor, selecione uma opção.');
     return;
   }
 
-  // Obtém o id_prato carregado na exibição do cardápio
+  // Recupera o id do prato atual
   const id_prato = window.id_prato_atual;
   if (!id_prato) {
-    alert('Cardápio não carregado ainda.');
+    alert('Cardápio ainda não foi carregado.');
     return;
   }
 
+  // Define o valor do voto (true para "sim", false para "não")
   const voto = respostaSelecionada.value === 'yes';
 
+  // Busca o IP do usuário
   const ip_usuario = await getUserIP();
   if (!ip_usuario) {
     alert('Não foi possível obter seu IP. Tente novamente.');
     return;
   }
-  console.log(id_prato,voto,ip_usuario);
+
+  // Define a data atual no formato ISO (padrão para JSON)
+  const data_voto = new Date().toISOString();
+
+  // Mostra no console para fins de depuração
+  console.log({ id_prato, voto, ip_usuario, data_voto });
+
+  // Envia os dados para o servidor
   try {
-    const response = await fetch('http://localhost:3000/votacao', {
+    const response = await fetch('https://api-cantina-storage.vercel.app/votacao', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ id_prato, voto, ip_usuario }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id_prato, voto, ip_usuario, data_voto })
     });
 
     if (!response.ok) {
       const err = await response.json();
-      throw new Error(err.error || 'Erro ao enviar voto');
+      throw new Error(err.error || 'Erro ao enviar voto.');
     }
 
     const data = await response.json();
@@ -123,6 +136,7 @@ form.addEventListener('submit', async e => {
     alert(`Erro: ${error.message}`);
   }
 });
+
 
 // Atualiza ao carregar
 fetchPratosApi();
