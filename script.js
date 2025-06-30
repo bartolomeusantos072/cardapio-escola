@@ -113,7 +113,7 @@ form.addEventListener('submit', async (e) => {
 
   // Envia os dados para o servidor
   try {
-    const response = await fetch('https://api-cantina-storage.vercel.app/votacao', {
+    const response = await fetch('https://api-cantina-storage.vercel.app/votacoes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
