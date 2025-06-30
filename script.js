@@ -32,7 +32,7 @@ function exibirResultado(cardapios) {
 
     const h3 = document.createElement('h3');
     h3.textContent = `${prato.turno} - ${prato.principal}`;
-    section.appendChild(h3);
+    main.appendChild(h3);
 
     const ul = document.createElement('ul');
     const itens = [
