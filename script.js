@@ -99,12 +99,12 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  const votoObj = { id_prato, voto, ip_usuario };
+  const votoObj = { id_prato, ip_usuario, voto };
 
   console.log('Enviando voto:', votoObj);
 
   try {
-    const response = await fetch('https://api-cantina-storage.vercel.app/votacoes', {
+    const response = await fetch('https://api-cantina-storage.vercel.app/votacao', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(votoObj)
