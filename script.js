@@ -58,8 +58,6 @@ function exibirResultado(cardapios) {
 
     // Salvar id_prato para uso no voto
     window.id_prato_atual = prato.id_prato;
-
-    console.log(`Hoje é ${nomeDoDia} e o cardápio é: ${prato.principal}`);
   } else {
     main.textContent = 'Hoje não temos cardápio disponível.';
   }
