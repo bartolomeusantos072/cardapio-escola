@@ -32,7 +32,7 @@ function exibirResultado(cardapios) {
 
     const h3 = document.createElement('h3');
     h3.textContent = `${prato.turno} - ${prato.principal}`;
-    main.appendChild(h3);
+    section.appendChild(h3);
 
     const ul = document.createElement('ul');
     const itens = [
@@ -56,7 +56,6 @@ function exibirResultado(cardapios) {
 
     main.appendChild(section);
 
-    // Salvar id_prato para uso no voto
     window.id_prato_atual = prato.id_prato;
   } else {
     main.textContent = 'Hoje não temos cardápio disponível.';
@@ -100,18 +99,14 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  // Aqui não precisa enviar data_voto, backend que define a data atual
-
   const votoObj = { id_prato, voto, ip_usuario };
 
   console.log('Enviando voto:', votoObj);
 
   try {
-    const response = await fetch('https://api-cantina-storage.vercel.app/votacoes', { // endpoint plural
+    const response = await fetch('https://api-cantina-storage.vercel.app/votacoes', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(votoObj)
     });
 
@@ -129,5 +124,5 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// Carrega o cardápio ao abrir a página
+// Chama para carregar cardápio assim que a página abre
 fetchPratosApi();
