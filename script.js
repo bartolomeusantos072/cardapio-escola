@@ -16,7 +16,7 @@ async function fetchPratosApi() {
 
 function exibirResultado(cardapios) {
   const main = document.querySelector('main');
-  main.innerHTML = ''; // limpa antes
+  main.innerHTML = '';
 
   const h2 = document.createElement('h2');
   h2.textContent = 'Cardápio do Dia';
@@ -63,7 +63,6 @@ function exibirResultado(cardapios) {
   }
 }
 
-// Busca o IP público do usuário
 async function getUserIP() {
   try {
     const response = await fetch('https://api.ipify.org?format=json');
@@ -81,44 +80,39 @@ const form = document.querySelector('footer form');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Verifica se uma resposta foi selecionada
   const respostaSelecionada = document.querySelector('input[name="resposta"]:checked');
   if (!respostaSelecionada) {
     alert('Por favor, selecione uma opção.');
     return;
   }
 
-  // Recupera o id do prato atual
   const id_prato = window.id_prato_atual;
   if (!id_prato) {
     alert('Cardápio ainda não foi carregado.');
     return;
   }
 
-  // Define o valor do voto (true para "sim", false para "não")
   const voto = respostaSelecionada.value === 'yes';
 
-  // Busca o IP do usuário
   const ip_usuario = await getUserIP();
   if (!ip_usuario) {
     alert('Não foi possível obter seu IP. Tente novamente.');
     return;
   }
 
-  // Define a data atual no formato ISO (padrão para JSON)
-  const data_voto = new Date().toISOString();
+  // Aqui não precisa enviar data_voto, backend que define a data atual
 
-  // Mostra no console para fins de depuração
-  console.log({ id_prato, voto, ip_usuario, data_voto });
+  const votoObj = { id_prato, voto, ip_usuario };
 
-  // Envia os dados para o servidor
+  console.log('Enviando voto:', votoObj);
+
   try {
-    const response = await fetch('https://api-cantina-storage.vercel.app/votacoes', {
+    const response = await fetch('https://api-cantina-storage.vercel.app/votacoes', { // endpoint plural
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id_prato, voto, ip_usuario, data_voto })
+      body: JSON.stringify(votoObj)
     });
 
     if (!response.ok) {
@@ -135,6 +129,5 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-
-// Atualiza ao carregar
+// Carrega o cardápio ao abrir a página
 fetchPratosApi();
