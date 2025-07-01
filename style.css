@@ -19,11 +19,15 @@ header img {
   height: 170px;
   width: 170px;
 }
-
+div {
+  heigth:100%;
+  width:100%;
+}
 h1 {
   font-size: 5em; /* Reduzido para melhor adaptação */
   color: yellow;
   text-align: center;
+  margin:auto;
 }
 
 h2, h3 {
