@@ -121,6 +121,7 @@ form.addEventListener('submit', async (e) => {
 
   } catch (error) {
     alert(`Erro: ${error.message}`);
+     window.location.href = 'resultado.html';
   }
 });
 
