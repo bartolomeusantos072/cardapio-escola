@@ -1,6 +1,6 @@
 async function fetchVotosApi() {
   try {
-    const resposta = await fetch('http://localhost:3000/votacao');
+    const resposta = await fetch('https://api-cantina-storage.vercel.app/votacao');
 
     if (!resposta.ok) throw new Error('Resultado não encontrado');
 
@@ -25,17 +25,44 @@ function exibirResultadoVotos(votos) {
     return;
   }
 
+  // Agrupar votos por id_prato
+  const contagem = {};
+
+  votos.forEach((voto) => {
+    const id = voto.id_prato;
+    if (!contagem[id]) {
+      contagem[id] = { votos_sim: 0, votos_nao: 0 };
+    }
+
+    if (voto.voto === true) {
+      contagem[id].votos_sim++;
+    } else {
+      contagem[id].votos_nao++;
+    }
+  });
+
+  // Mapeamento opcional de ID para nome do prato
+  const nomesPratos = {
+    101: 'Arroz com Feijão',
+    102: 'Macarronada',
+    103: 'Frango Assado',
+    // Adicione mais se necessário
+  };
+
   const ul = document.createElement('ul');
 
-  votos.forEach((prato) => {
+  for (const id in contagem) {
+    const prato = contagem[id];
+    const nome = nomesPratos[id] || `Prato ID ${id}`;
+
     const li = document.createElement('li');
     li.innerHTML = `
-      <strong>${prato.principal}</strong><br>
-      Votos "Sim": ${prato.votos_sim || 0}<br>
-      Votos "Não": ${prato.votos_nao || 0}
+      <strong>${nome}</strong><br>
+      Votos "Sim": ${prato.votos_sim}<br>
+      Votos "Não": ${prato.votos_nao}
     `;
     ul.appendChild(li);
-  });
+  }
 
   main.appendChild(ul);
 }
