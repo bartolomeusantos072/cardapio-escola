@@ -1,81 +1,169 @@
+/* Estilo base para desktops e telas grandes */
 header {
-   background-image: url("img/images.jfif");
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-position: top;
-   background-attachment: scroll;
-   height: 200px;
-   width: 100%;
-   display: flex;
-   align-items: center;
-   justify-content: space-around;
-
+  background-image: url("img/images.jfif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  background-attachment: scroll;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
-header img{
+header img {
   border-radius: 50%;
   height: 170px;
   width: 170px;
 }
 
-h1{
-   font-size: 10em; 
-   color: yellow;    
-}
-
-h2, h3{
+h1 {
+  font-size: 5em; /* Reduzido para melhor adaptação */
+  color: yellow;
   text-align: center;
 }
 
-h2{
+h2, h3 {
+  text-align: center;
+}
+
+h2 {
   color: green;
-  font-size: 60px;
+  font-size: 3em;
 }
 
-h3{
-        color: orangered;
-        font-size: 50px;
-
-}
-li{
-  font-size: 45px;
+h3 {
+  color: orangered;
+  font-size: 2.5em;
 }
 
-
-label, button{
-        text-align: center;
-        font-size: 30px;
-        
-}
-form h3{
-  color:red;
+li {
+  font-size: 1.5em;
 }
 
-section{
-        display: flex;
-        justify-content: center;
+label, button {
+  text-align: center;
+  font-size: 1.2em;
 }
 
-section img{
-        height: 200px;
-        width: 250px;
-        
-}
-form{
-        text-align: center;
+form h3 {
+  color: red;
 }
 
-form div{
-        display: flex;
-        justify-content:space-evenly;
+section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
 }
 
-button{
+section img {
+  height: 200px;
+  width: 250px;
+  object-fit: cover;
+}
+
+form {
+  text-align: center;
+  padding: 20px;
+}
+
+form div {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button {
   padding: 15px 32px;
   border: none;
   margin: 4px 2px;
   background-color: green;
   color: white;
   cursor: pointer;
+  font-size: 1em;
 }
 
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2.5em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  li {
+    font-size: 1.2em;
+  }
+
+  form div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+  }
+
+  header img {
+    height: 130px;
+    width: 130px;
+    margin-bottom: 10px;
+  }
+
+  section img {
+    width: 80%;
+    height: auto;
+  }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  li {
+    font-size: 1em;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  header img {
+    height: 100px;
+    width: 100px;
+  }
+
+  section {
+    flex-direction: column;
+  }
+
+  section img {
+    width: 100%;
+    height: auto;
+  }
+}
