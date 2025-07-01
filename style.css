@@ -1,17 +1,30 @@
-/* Estilo base para desktops e telas grandes */
+/* ======== RESET CSS BÁSICO ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ======== ESTILOS BASE ======== */
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+/* Header atualizado */
 header {
   background-image: url("img/images.jfif");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
-  background-attachment: scroll;
+  background-position: center center;
   height: 200px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 0;
+  margin: 0;
 }
 
 header img {
@@ -19,17 +32,14 @@ header img {
   height: 170px;
   width: 170px;
 }
-div {
-  heigth:100%;
-  width:100%;
-}
+
 h1 {
-  font-size: 5em; /* Reduzido para melhor adaptação */
+  font-size: 10em; /* Restaurado para telas grandes */
   color: yellow;
   text-align: center;
-  margin:auto;
 }
 
+/* Outros estilos mantidos */
 h2, h3 {
   text-align: center;
 }
@@ -93,7 +103,7 @@ button {
   font-size: 1em;
 }
 
-/* Responsividade para tablets */
+/* ======== MEDIA QUERIES PARA RESPONSIVIDADE ======== */
 @media (max-width: 768px) {
   h1 {
     font-size: 3em;
@@ -134,7 +144,6 @@ button {
   }
 }
 
-/* Responsividade para celulares */
 @media (max-width: 480px) {
   h1 {
     font-size: 2em;
